@@ -1,11 +1,19 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { PostsIndex } from "./PostsIndex";
 
 export function Home() {
-  const posts = [
-    {id: 1, name: "test1", body: "here is a little body", url: "http://via.placeholder.com/150"},
-    {id: 2, name: "test2", body: "here is a bigger body", url: "http://via.placeholder.com/300"}
-  ]
+const [posts, setPosts] = useState([]);
+
+const handleIndexPosts = () => {
+  console.log("handleIndexPosts");
+  axios.get("http://localhost:3000/posts.json").then((response) => {
+    console.log(response.data);
+    setPosts(response.data);
+  });
+};
   
+  useEffect(handleIndexPosts, []);
   
   return (
     <div>

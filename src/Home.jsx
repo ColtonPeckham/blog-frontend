@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { PostsIndex } from "./PostsIndex";
+import { Signup } from "./Signup";
 
 export function Home() {
 const [posts, setPosts] = useState([]);
@@ -17,6 +18,7 @@ const handleIndexPosts = () => {
   
   return (
     <div>
+      <Signup />
       <PostsIndex posts={posts}/>
     </div>
   )

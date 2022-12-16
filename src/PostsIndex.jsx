@@ -10,7 +10,7 @@ export function PostsIndex(props) {
         <div key={post.id} className="posts">
           <h2>{post.title}</h2>
           <img src={post.image}/>
-          <body>{post.body}</body>
+          <p>{post.body}</p>
           <button className="btn btn-info" onClick={ () => props.onSelectPost(post) }>MORE INFO</button>
         </div>
       ))}
@@ -25,15 +25,6 @@ export function PostsIndex(props) {
             <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
           </div>
         </div>
-
-            {props.posts.map((post) => (
-              <div key={post.id} className="posts">
-                <h2>{post.title}</h2>
-                <h4>{post.body}</h4>
-                <img src={post.image_url} alt="" />
-                <button className="btn btn-info" onClick={ () => props.onSelectPost(post) }>MORE INFO</button>
-              </div>
-            ))}
       </div>
     </div>
   );

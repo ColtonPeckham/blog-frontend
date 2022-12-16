@@ -22,18 +22,32 @@ const handleIndexPosts = () => {
 };
  
 const handleShowPost = (post) => {
-  setIsRecipesShowVisible(true);
-  setCurrentRecipe(post);
+  setIsPostShowVisible(true);
+  setCurrentPost(post);
 }
 
 const handleHidePost = () => {
-  setIsPostsShowVisible(false);
+  setIsPostShowVisible(false);
 }
 
 const handleCreatePost = (params) => {
   axios.post("http://localhost:3000/posts.json", params).then((response) => {
     setPosts([...posts, response.data])
   });
+}
+
+const handleUpdatePost = (id, params) => {
+  axios.patch(`http://localhost:3000/posts/${id}.json`, params).then((response) => {
+    setPosts(
+      posts.map((post) => {
+        if (post.id === response.data.id) {
+          return response.data;
+        } else {
+          return post;
+        }
+      })
+    )
+  })
 }
   useEffect(handleIndexPosts, []);
   
@@ -42,10 +56,10 @@ const handleCreatePost = (params) => {
       <Signup />
       <Login />
       <LogoutLink />
-      <Modal show={isPostsShowVisible} onClose={handleHidePost}/>
-        <PostsShow post={currentPost}/>
+      <Modal show={isPostsShowVisible} onClose={handleHidePost}>
+        <PostsShow post={currentPost} onPostUpdate={handleUpdatePost}/>
 
-      <Modal/>
+      </Modal>
 
       <PostsNew onPostCreate={handleCreatePost} />
       <PostsIndex posts={posts} onSelectPost={handleShowPost} />

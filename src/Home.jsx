@@ -46,9 +46,11 @@ const handleUpdatePost = (id, params) => {
           return post;
         }
       })
-    )
+    );
+    handleHidePost();
   })
 }
+
   useEffect(handleIndexPosts, []);
   
   return (

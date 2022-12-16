@@ -51,6 +51,15 @@ const handleUpdatePost = (id, params) => {
   })
 }
 
+  const handleDestroyPost = (post) => {
+    axios.delete(`http://localhost:3000/posts/${post.id}.json`).then((response) => {
+    setPosts(posts.filter((p) => p.id !== post.id));
+    handleHidePost();
+  });
+}
+
+   
+
   useEffect(handleIndexPosts, []);
   
   return (
@@ -59,7 +68,7 @@ const handleUpdatePost = (id, params) => {
       <Login />
       <LogoutLink />
       <Modal show={isPostsShowVisible} onClose={handleHidePost}>
-        <PostsShow post={currentPost} onPostUpdate={handleUpdatePost}/>
+        <PostsShow post={currentPost} onPostUpdate={handleUpdatePost} onPostDestroy={handleDestroyPost}/>
 
       </Modal>
 

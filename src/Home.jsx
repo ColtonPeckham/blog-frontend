@@ -64,7 +64,7 @@ const handleUpdatePost = (id, params) => {
   
   return (
     <div>
-      <Signup />
+      
       <Login />
       <LogoutLink />
       <Modal show={isPostsShowVisible} onClose={handleHidePost}>

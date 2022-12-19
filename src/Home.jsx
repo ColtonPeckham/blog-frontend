@@ -30,12 +30,6 @@ const handleHidePost = () => {
   setIsPostShowVisible(false);
 }
 
-const handleCreatePost = (params) => {
-  axios.post("http://localhost:3000/posts.json", params).then((response) => {
-    setPosts([...posts, response.data])
-  });
-}
-
 const handleUpdatePost = (id, params) => {
   axios.patch(`http://localhost:3000/posts/${id}.json`, params).then((response) => {
     setPosts(
@@ -72,7 +66,7 @@ const handleUpdatePost = (id, params) => {
 
       </Modal>
 
-      <PostsNew onPostCreate={handleCreatePost} />
+   
       <PostsIndex posts={posts} onSelectPost={handleShowPost} />
     </div>
   )

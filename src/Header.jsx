@@ -34,6 +34,9 @@ const handleSignupClose = () =>
         <Link to="/about">About</Link>
         </li>
         <li className="nav-item">
+        <Link to="/posts/new">New Blogs</Link>
+        </li>
+        <li className="nav-item">
           <a className="nav-link" href="#posts-index">Blogs</a>
         </li>
         <li className="nav-item dropdown">

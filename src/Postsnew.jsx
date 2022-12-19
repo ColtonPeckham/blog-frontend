@@ -1,6 +1,14 @@
 import axios from "axios";
 
 export function PostsNew(props) {
+}
+const handleCreatePost = (params) => {
+  axios.post("http://localhost:3000/posts.json", params).then((response) => {
+    setPosts([...posts, response.data])
+  });
+}
+
+export function PostsNew(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("bloggin!");

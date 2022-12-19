@@ -1,7 +1,7 @@
 export function About() {
   return (
     <div>
-      <h1>About Us</h1>
+      <h1>This is a website made by nobody for nobody</h1>
     </div>
   );
 }

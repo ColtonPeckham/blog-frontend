@@ -60,7 +60,7 @@ const handleUpdatePost = (id, params) => {
     <div>
       
      
-      <LogoutLink />
+     
       <Modal show={isPostsShowVisible} onClose={handleHidePost}>
         <PostsShow post={currentPost} onPostUpdate={handleUpdatePost} onPostDestroy={handleDestroyPost}/>
 

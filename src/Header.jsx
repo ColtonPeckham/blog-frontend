@@ -1,11 +1,14 @@
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Modal } from "./Modal";
 import { Signup } from "./Signup"
-import { useState } from "react";
+import { Login } from "./Login"
+import { useState } from "react"
 
 export function Header() {
 
 const [isSignupVisable, setIsSignupVisable] = useState(false)
+const [isLoginVisable, setIsLoginVisable] = useState(false)
 
 const handleSignupShow = () =>
   setIsSignupVisable(true);
@@ -13,8 +16,24 @@ const handleSignupShow = () =>
 const handleSignupClose = () =>
   setIsSignupVisable(false);
 
+  const handleLoginShow = () => {
+    setIsLoginVisable(true);
+  }
+
+  const handleLoginClose = () => {
+    setIsLoginVisable(false);
+  }
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    delete axios.defaults.headers.common["Authorization"];
+    localStorage.removeItem("jwt");
+    window.location.href = "/";
+  };
+
 
   return (
+    <div>
     <header>
       <nav className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
@@ -24,27 +43,35 @@ const handleSignupClose = () =>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-      <li className="nav-item">
-        <Link to="/login">Login</Link>
-        </li>
-        |
+      <li className="nav-item"/>
         <li className="nav-item">
         <Link to="/">Home</Link>
-        </li>
-        |
-        <li className="nav-item">
-        <Link to="/signup">Signup</Link>
         </li>
         |
         <li className="nav-item">
         <Link to="/about">About</Link>
         </li>
         |
+        {localStorage.jwt === undefined ? 
+        <>
+          <li className="nav-item">
+          <a onClick={ handleSignupShow } href="#">Signup</a>
+          </li>
+          |
+          <li className="nav-item">
+          <a onClick={ handleLoginShow } href="#">Login</a>
+          </li>
+        </> :
         <li className="nav-item">
-        <Link to="/posts/new">New Blogs</Link>
+          <a onClick={ handleLogout } href="#">Logout</a>
         </li>
+        } 
+        |
         <li className="nav-item">
           <a className="nav-link" href="#posts-index">Blogs</a>
+        </li>
+        <li className="nav-item">
+        <a className ="nav-link" href="/posts/new">Create Blogs</a>
         </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,7 +99,12 @@ const handleSignupClose = () =>
 <Modal show={isSignupVisable} onClose={handleSignupClose}>
   < Signup />
 </Modal>
+
+<Modal show={isLoginVisable} onClose={handleLoginClose}>
+  < Login />
+</Modal>
 </header>
 
+</div>
   );
 }
